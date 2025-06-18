@@ -16,9 +16,20 @@ const express_1 = require("express");
 const client_1 = require("@prisma/client");
 const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
 const config_1 = require("../config");
+const user_1 = require("../types/user");
+const hashing_1 = require("../types/hashing");
 const userRouter = (0, express_1.Router)();
 const prisma = new client_1.PrismaClient();
 userRouter.post("/signup", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const body = req.body;
+    const { success } = user_1.signupTypes.safeParse(body);
+    if (!success) {
+        console.log(body);
+        res.status(400).json({
+            message: "Incorrect Detail"
+        });
+        return;
+    }
     try {
         const existingUser = yield prisma.user.findFirst({
             where: {
@@ -31,11 +42,12 @@ userRouter.post("/signup", (req, res) => __awaiter(void 0, void 0, void 0, funct
             });
             return;
         }
+        const hashedPass = yield (0, hashing_1.hashedPassword)(req.body.password);
         const user = yield prisma.user.create({
             data: {
                 phone: req.body.phone,
                 name: req.body.name,
-                password: req.body.password
+                password: hashedPass
             }
         });
         if (user) {
@@ -54,6 +66,15 @@ userRouter.post("/signup", (req, res) => __awaiter(void 0, void 0, void 0, funct
     }
 }));
 userRouter.post("/login", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const body = req.body;
+    const { success } = user_1.loginTypes.safeParse(body);
+    if (!success) {
+        console.log(body);
+        res.status(400).json({
+            message: "Incorrect Detail"
+        });
+        return;
+    }
     try {
         const user = yield prisma.user.findFirst({
             where: {
@@ -66,15 +87,16 @@ userRouter.post("/login", (req, res) => __awaiter(void 0, void 0, void 0, functi
             });
             return;
         }
-        if (user.password != req.body.password) {
-            res.json({
-                message: "invalid password"
+        const hashedPassword = yield (0, hashing_1.comparePassword)(req.body.password, user.password);
+        if (!hashedPassword) {
+            res.status(401).json({
+                message: "Invalid password"
             });
             return;
         }
         else {
             const token = jsonwebtoken_1.default.sign({ userId: user.id }, config_1.JWT_SECRET);
-            res.json({
+            res.status(200).json({
                 message: "Sign in Successful",
                 token: token
             });

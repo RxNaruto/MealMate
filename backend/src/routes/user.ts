@@ -2,12 +2,24 @@ import { Router} from "express";
 import { PrismaClient } from "@prisma/client";
 import jwt from "jsonwebtoken";
 import { JWT_SECRET } from "../config";
+import { signupTypes,loginTypes } from "../types/user";
+import { hashedPassword,comparePassword } from "../types/hashing";
 const userRouter = Router();
 const prisma = new PrismaClient();
 
 
 userRouter.post("/signup",async(req,res)=>{
+    const body = req.body;
+    const {success} = signupTypes.safeParse(body);
+    if(!success){
+        console.log(body);
+        res.status(400).json({
+            message: "Incorrect Detail"
+        })
+        return;
+    }
     try {
+        
         const existingUser = await prisma.user.findFirst({
             where:{
                 phone: req.body.phone
@@ -19,11 +31,12 @@ userRouter.post("/signup",async(req,res)=>{
             })
             return;
         }
+        const hashedPass = await hashedPassword(req.body.password);
         const user = await prisma.user.create({
             data: {
                 phone: req.body.phone,
                 name: req.body.name,
-                password: req.body.password
+                password: hashedPass
                
             }
         })
@@ -45,6 +58,15 @@ userRouter.post("/signup",async(req,res)=>{
 })
 
 userRouter.post("/login",async(req,res)=>{
+    const body = req.body;
+    const {success} = loginTypes.safeParse(body);
+    if(!success){
+        console.log(body);
+        res.status(400).json({
+            message: "Incorrect Detail"
+        })
+        return;
+    }
     try {
         const user = await prisma.user.findFirst({
             where:{
@@ -57,15 +79,16 @@ userRouter.post("/login",async(req,res)=>{
             })
             return;
         }
-        if(user.password!=req.body.password){
-            res.json({
-                message: "invalid password"
+        const hashedPassword = await comparePassword(req.body.password,user.password);
+        if(!hashedPassword){
+            res.status(401).json({
+                message: "Invalid password"
             })
             return;
         }
         else{
             const token = jwt.sign({userId: user.id},JWT_SECRET);
-            res.json({
+            res.status(200).json({
                 message: "Sign in Successful",
                 token: token
             })
