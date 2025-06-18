@@ -20,3 +20,30 @@ model user{
   password String
   addresss String?
 }
+
+model Restaurant{
+  id Int @id @default(autoincrement())
+  name String
+  address String
+  ownerName String
+  contact String
+  menuItems RestaurantFood[]
+
+}
+
+model Food{
+  id Int @id @default(autoincrement())
+  name String
+  description String
+  servedAt RestaurantFood[]
+  
+}
+
+model RestaurantFood{
+  id Int @id @default(autoincrement())
+  restaurantId Int
+  restaurant Restaurant @relation(fields: [restaurantId],references: [id])
+  foodId Int
+  food Food @relation(fields: [foodId],references: [id])
+  price Float
+}
