@@ -33,7 +33,7 @@ foodRouter.get("/getAllFood", (req, res) => __awaiter(void 0, void 0, void 0, fu
         else {
             response = yield prisma.food.findMany();
             res.status(200).json({
-                response: response
+                foods: response
             });
         }
     }
@@ -64,6 +64,21 @@ foodRouter.get("/:id/restaurant", (req, res) => __awaiter(void 0, void 0, void 0
     }
     catch (e) {
         console.log(e);
+        res.status(500).json({
+            message: "Internal Server Error"
+        });
+    }
+}));
+foodRouter.get("/allRestaurants", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const rest = yield prisma.restaurant.findMany();
+        if (rest) {
+            res.status(200).json({
+                restaurants: rest
+            });
+        }
+    }
+    catch (e) {
         res.status(500).json({
             message: "Internal Server Error"
         });

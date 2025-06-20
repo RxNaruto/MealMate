@@ -1,6 +1,6 @@
 import { PrismaClient} from "@prisma/client";
 import { Router } from "express";
-import { isForOfStatement } from "typescript";
+import { idText, isForOfStatement } from "typescript";
 const foodRouter = Router();
 
 const prisma = new PrismaClient()
@@ -27,7 +27,7 @@ foodRouter.get("/getAllFood",async(req,res)=>{
         else{
             response = await prisma.food.findMany();
             res.status(200).json({
-                response: response
+                foods: response
             })
         }
     } catch (e) {
@@ -63,6 +63,21 @@ foodRouter.get("/:id/restaurant",async(req,res)=>{
         message: "Internal Server Error"
     })
    }
+})
+
+foodRouter.get("/allRestaurants",async(req,res)=>{
+    try {
+        const rest = await prisma.restaurant.findMany();
+        if(rest){
+            res.status(200).json({
+                restaurants: rest
+            })
+        }
+    } catch (e) {
+        res.status(500).json({
+            message: "Internal Server Error"
+        })
+    }
 })
 
 export default foodRouter;

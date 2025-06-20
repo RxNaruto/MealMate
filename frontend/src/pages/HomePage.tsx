@@ -21,7 +21,7 @@ export const HomePage = () => {
               imageAlt="Delicious breakfast with eggs and toast"
             />
             <ServiceCard
-              title="DINEOUT"
+              title="RESTAURANTS"
               subtitle="EAT OUT & SAVE MORE"
               discount="UPTO 50% OFF"
               imageSrc="https://images.unsplash.com/photo-1465146344425-f00d5f5c8f07?w=400&h=300&fit=crop"
