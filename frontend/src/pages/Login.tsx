@@ -40,20 +40,13 @@ export const Login = () => {
         </div>
 
         {/* Food illustration */}
-        <div className="flex justify-end mb-8">
-          <img 
-            src="/lovable-uploads/3fd7d23d-0f48-4e06-8072-f5f9edf39360.png" 
-            alt="Food illustration"
-            className="w-32 h-auto"
-          />
-        </div>
 
         {/* Login form */}
         <form onSubmit={handleLogin} className="space-y-6">
           <div>
-            <div className="relative">
+            <div className="relative pb-6">
               <InputBox
-                label={"Mobile No."}
+                label={"Phone"}
                 placeholder={"9898989898"}
                 onChange={(e) => setPhone(e.target.value)}
               />

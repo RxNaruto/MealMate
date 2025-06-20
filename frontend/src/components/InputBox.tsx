@@ -5,10 +5,10 @@ interface inputBox{
 }
 
 export const InputBox=({label,placeholder,onChange}: inputBox)=>{
-       return <div>
-        <div>
+       return <div className="bg-gray-100">
+        <div className="text-2xl font-medium">
             {label}
         </div>
-        <input placeholder={placeholder} onChange={onChange}  />
+        <input placeholder={placeholder} onChange={onChange} className="w-96 h-10 rounded-sm " />
        </div>
 }

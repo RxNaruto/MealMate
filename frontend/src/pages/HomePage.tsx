@@ -3,9 +3,10 @@ import HeroSection from '../components/HeroSection';
 import ServiceCard from '../components/ServiceCard';
 
 export const HomePage = () => {
+  const isLoggedIn = !!localStorage.getItem("token");
   return (
     <div className="min-h-screen bg-gray-50">
-      <Header />
+      <Header isLoggedIn={isLoggedIn} />
       <HeroSection />
       
       {/* Services Section */}

@@ -1,9 +1,18 @@
 import React from 'react';
 import { ArrowRight } from 'lucide-react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate} from 'react-router-dom';
 
-const Header = () => {
+interface HeaderProps{
+  isLoggedIn: boolean;
+}
+
+const Header = ({isLoggedIn}:HeaderProps) => {
     const navigate = useNavigate();
+
+    const handleLogout=()=>{
+      localStorage.removeItem("token");
+      window.location.reload();
+    }
   return (
     <header className="bg-white shadow-sm relative z-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -33,12 +42,21 @@ const Header = () => {
                 Get the App
                 <ArrowRight className="ml-2 h-4 w-4" />
               </button>
-              <button className="bg-black text-white px-6 py-2 rounded-lg text-sm font-medium hover:bg-gray-800 transition-colors"
+              {isLoggedIn ?(
+                  <button
+                  className="bg-black text-white px-6 py-2 rounded-lg text-sm font-medium hover:bg-gray-800 transition-colors"
+                  onClick={handleLogout}
+                >
+                  Logout
+                </button>
+              ):(
+                <button className="bg-black text-white px-6 py-2 rounded-lg text-sm font-medium hover:bg-gray-800 transition-colors"
               onClick={()=>{
                 navigate("/login");
               }}>
                 Sign in
               </button>
+              )}
             </div>
           </div>
         </div>
