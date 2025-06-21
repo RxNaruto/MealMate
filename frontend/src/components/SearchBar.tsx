@@ -1,24 +1,20 @@
-import { useState } from "react";
-import { useSearchFood } from "../hooks/searchFood";
+import React from "react";
 
-export const Searchbar=()=>{
-    const[query,setQuery]=useState("");
-    const{foods} = useSearchFood(query);
-    return <div className="p-4">
-        <input type="text"
-        placeholder="Search Food..."
-        value={query} 
-        onChange={(e)=>{
-            setQuery(e.target.value);
-        }}/>
-        <div className="p-4 grid grid-cols-2 gap-4">
-        {foods.map((fooditems)=>(
-            <div key={fooditems.id} className="bg-white p-4 rounded shadow">
-                <h1 className="text-lg font-bold">{fooditems.name}</h1>
-                <p className="text-gray-600">{fooditems.description}</p>
-            </div>
-        ))}
-
-    </div>
-    </div>
+interface SearchBarProps {
+  query: string;
+  setQuery: (value: string) => void;
 }
+
+export const SearchBarComponent: React.FC<SearchBarProps> = ({ query, setQuery }) => {
+  return (
+    <div>
+      <input
+        type="text"
+        placeholder="Search food..."
+        value={query}
+        onChange={(e) => setQuery(e.target.value)}
+        className="border border-gray-300 px-4 py-2 rounded w-full mb-6"
+      />
+    </div>
+  );
+};
