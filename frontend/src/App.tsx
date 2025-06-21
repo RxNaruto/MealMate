@@ -16,6 +16,7 @@ function App(){
      <Route path="/res" element={<GetRestaurant />}/>
      <Route path="/food" element={<AllFood />} />
      <Route path="/food/:id/restaurants" element={<RestaurantByFood />} />
+
     </Routes>
     </BrowserRouter>
     </>
