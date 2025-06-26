@@ -75,31 +75,31 @@ foodRouter.get("/:id/food",async(req,res)=>{
 
 })
 
-foodRouter.get("/:id/restaurant",async(req,res)=>{
-    const foodId = Number(req.params.id);
-   try {
-     const restaurant = await prisma.restaurantFood.findMany({
-         where:{
-             foodId
-         },
-         include:{
-             restaurant: true,
-             food: true
-         }
-     });
-     res.json(restaurant.map(rf=>({
-         restaurantId: rf.restaurant.id,
-         name: rf.restaurant.name,
-         price: rf.price
+foodRouter.get("/:id/restaurant", async (req, res) => {
+  const foodId = Number(req.params.id);
+  try {
+    const restaurant = await prisma.restaurantFood.findMany({
+      where: { foodId },
+      include: {
+        restaurant: true,
+        food: true,
+      },
+    });
 
-     })))
-   } catch (e) {
+    res.json(
+      restaurant.map((rf) => ({
+        restaurantId: rf.restaurant.id,
+        name: rf.restaurant.name,
+        price: rf.price,
+        foodName: rf.food.name,    
+        foodId: rf.food.id,         
+      }))
+    );
+  } catch (e) {
     console.log(e);
-    res.status(500).json({
-        message: "Internal Server Error"
-    })
-   }
-})
+    res.status(500).json({ message: "Internal Server Error" });
+  }
+});
 
 foodRouter.get("/allRestaurants",async(req,res)=>{
 

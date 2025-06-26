@@ -6,6 +6,7 @@ export interface CartItem {
   price: number;
   quantity: number;
   foodId: number;
+  foodName: string;
 }
 
 export const cartAtom = atom<CartItem[]>([]);
