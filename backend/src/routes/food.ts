@@ -38,6 +38,43 @@ foodRouter.get("/getAllFood",async(req,res)=>{
     
 })
 
+foodRouter.get("/:id/food",async(req,res)=>{
+    const resId = Number(req.params.id)
+    try {
+        const restaurantWithFood = await prisma.restaurant.findUnique({
+            where:{
+                id: resId
+            },
+            include:{
+                menuItems: {
+                    include: {
+                        food: true
+                    }
+                }
+            }
+        });
+        if(!restaurantWithFood){
+            res.json({
+                message: "Restaurant not found"
+            })
+            return
+        }
+        res.json(restaurantWithFood.menuItems.map(rf=>({
+         name: rf.food.name,
+         description: rf.food.description,
+         price: rf.price
+
+     })))
+        
+    } catch (e) {
+        console.log(e);
+        res.status(500).json({
+            message: "Internal Server Error"
+        })
+    }
+
+})
+
 foodRouter.get("/:id/restaurant",async(req,res)=>{
     const foodId = Number(req.params.id);
    try {

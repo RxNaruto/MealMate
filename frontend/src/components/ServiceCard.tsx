@@ -1,5 +1,6 @@
 import React from 'react';
 import { ArrowRight } from 'lucide-react';
+import { Link } from 'react-router-dom';
 
 interface ServiceCardProps {
   title: string;
@@ -7,6 +8,7 @@ interface ServiceCardProps {
   discount: string;
   imageSrc: string;
   imageAlt: string;
+  linkTo: string;
 }
 
 const ServiceCard: React.FC<ServiceCardProps> = ({ 
@@ -14,10 +16,12 @@ const ServiceCard: React.FC<ServiceCardProps> = ({
   subtitle, 
   discount, 
   imageSrc, 
-  imageAlt 
+  imageAlt,
+  linkTo
 }) => {
   return (
-    <div className="bg-white rounded-3xl p-8 shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-2 group">
+    < Link to={linkTo}>
+      <div className="bg-white rounded-3xl p-8 shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-2 group">
       <div className="space-y-4">
         <div>
           <h3 className="text-2xl font-bold text-gray-800 mb-1">{title}</h3>
@@ -40,6 +44,7 @@ const ServiceCard: React.FC<ServiceCardProps> = ({
         </button>
       </div>
     </div>
+    </Link>
   );
 };
 

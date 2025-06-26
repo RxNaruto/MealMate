@@ -14,18 +14,20 @@ export const HomePage = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto">
             <ServiceCard
-              title="FOOD DELIVERY"
+              title="EXPLORE FOOD"
               subtitle="FROM RESTAURANTS"
               discount="UPTO 60% OFF"
               imageSrc="https://images.unsplash.com/photo-1618160702438-9b02ab6515c9?w=400&h=300&fit=crop"
               imageAlt="Delicious breakfast with eggs and toast"
+              linkTo='/food'
             />
             <ServiceCard
-              title="RESTAURANTS"
+              title="EXPLORE RESTAURANTS"
               subtitle="EAT OUT & SAVE MORE"
               discount="UPTO 50% OFF"
-              imageSrc="https://images.unsplash.com/photo-1465146344425-f00d5f5c8f07?w=400&h=300&fit=crop"
+              imageSrc="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8cmVzdGF1cmFudHxlbnwwfHwwfHx8MA%3D%3D?w=400&h=300&fit=crop"
               imageAlt="Restaurant dining experience"
+              linkTo='/res'
             />
           </div>
         </div>

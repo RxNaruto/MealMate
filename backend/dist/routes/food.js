@@ -44,6 +44,40 @@ foodRouter.get("/getAllFood", (req, res) => __awaiter(void 0, void 0, void 0, fu
         });
     }
 }));
+foodRouter.get("/:id/food", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const resId = Number(req.params.id);
+    try {
+        const restaurantWithFood = yield prisma.restaurant.findUnique({
+            where: {
+                id: resId
+            },
+            include: {
+                menuItems: {
+                    include: {
+                        food: true
+                    }
+                }
+            }
+        });
+        if (!restaurantWithFood) {
+            res.json({
+                message: "Restaurant not found"
+            });
+            return;
+        }
+        res.json(restaurantWithFood.menuItems.map(rf => ({
+            name: rf.food.name,
+            description: rf.food.description,
+            price: rf.price
+        })));
+    }
+    catch (e) {
+        console.log(e);
+        res.status(500).json({
+            message: "Internal Server Error"
+        });
+    }
+}));
 foodRouter.get("/:id/restaurant", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const foodId = Number(req.params.id);
     try {
