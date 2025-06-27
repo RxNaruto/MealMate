@@ -68,7 +68,8 @@ foodRouter.get("/:id/food", (req, res) => __awaiter(void 0, void 0, void 0, func
         res.json(restaurantWithFood.menuItems.map(rf => ({
             name: rf.food.name,
             description: rf.food.description,
-            price: rf.price
+            price: rf.price,
+            image: rf.food.image,
         })));
     }
     catch (e) {
@@ -92,6 +93,7 @@ foodRouter.get("/:id/restaurant", (req, res) => __awaiter(void 0, void 0, void 0
             restaurantId: rf.restaurant.id,
             name: rf.restaurant.name,
             price: rf.price,
+            image: rf.restaurant.image,
             foodName: rf.food.name,
             foodId: rf.food.id,
         })));

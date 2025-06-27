@@ -27,6 +27,7 @@ model Restaurant{
   address String
   ownerName String
   contact String
+  image String?
   menuItems RestaurantFood[]
 
 }
@@ -35,6 +36,7 @@ model Food{
   id Int @id @default(autoincrement())
   name String
   description String
+  image String?
   servedAt RestaurantFood[]
   
 }

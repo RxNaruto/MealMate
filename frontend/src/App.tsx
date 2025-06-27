@@ -21,6 +21,7 @@ function App(){
      <Route path="/res/:id/food" element={<FoodByRes />} />
      <Route path="/cart" element={<CartPage />}/>
 
+
     </Routes>
     </BrowserRouter>
     </>

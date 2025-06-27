@@ -5,6 +5,7 @@ interface Food{
     id: number;
     name: string;
     description: string;
+    image: string;
 }
 export const useGetAllFoods=()=>{
     const[foods,setFoods]=useState<Food[]>([]);

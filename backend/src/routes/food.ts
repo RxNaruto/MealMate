@@ -62,7 +62,8 @@ foodRouter.get("/:id/food",async(req,res)=>{
         res.json(restaurantWithFood.menuItems.map(rf=>({
          name: rf.food.name,
          description: rf.food.description,
-         price: rf.price
+         price: rf.price,
+         image: rf.food.image,
 
      })))
         
@@ -91,6 +92,7 @@ foodRouter.get("/:id/restaurant", async (req, res) => {
         restaurantId: rf.restaurant.id,
         name: rf.restaurant.name,
         price: rf.price,
+        image: rf.restaurant.image,
         foodName: rf.food.name,    
         foodId: rf.food.id,         
       }))
