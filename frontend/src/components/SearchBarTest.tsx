@@ -6,7 +6,7 @@ interface SearchBarProps {
   setQuery: (value: string) => void;
 }
 
-export const SearchBarComponent: React.FC<SearchBarProps> = ({ query, setQuery }) => {
+export const SearchBarTest: React.FC<SearchBarProps> = ({ query, setQuery }) => {
   const [isFocused, setIsFocused] = useState(false);
   const inputRef = useRef<HTMLInputElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);

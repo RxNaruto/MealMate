@@ -2,7 +2,7 @@ import { useParams } from "react-router-dom";
 import { useFoodByRes } from "../hooks/useFoodByRestaurant";
 import { RestaurantFoodCard } from "../components/RestaurantFoodCard";
 
-export const FoodByRes=()=>{
+export const GetResTest=()=>{
     const {id}= useParams();
     const {food} = useFoodByRes(id!);
     return (

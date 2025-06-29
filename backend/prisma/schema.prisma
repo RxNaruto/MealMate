@@ -48,4 +48,5 @@ model RestaurantFood{
   foodId Int
   food Food @relation(fields: [foodId],references: [id])
   price Float
+  image String
 }

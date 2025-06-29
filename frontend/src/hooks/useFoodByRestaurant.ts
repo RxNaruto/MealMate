@@ -6,6 +6,7 @@ interface FoodProp {
   name: string;
   description: string;
   price: number;
+  image: string;
 }
 
 export const useFoodByRes = (resId: string) => {

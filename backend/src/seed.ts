@@ -102,7 +102,8 @@ async function seed() {
             data: {
               restaurant: { connect: { id: restaurant.id } },
               food: { connect: { id: food.id } },
-              price: parseFloat(faker.commerce.price({ min: 100, max: 500 }))
+              price: parseFloat(faker.commerce.price({ min: 100, max: 500 })),
+              image: "https://as2.ftcdn.net/v2/jpg/12/32/74/05/1000_F_1232740534_EXK9cA9xpYZ2pGmM5NJkPigFsei4H3SP.jpg?auto=compress&cs=tinysrgb&w=800"
             }
           })
         )

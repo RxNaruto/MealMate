@@ -9,7 +9,7 @@ interface RestaurantProp{
     address: string;
     ownerName: string;
     contact: string;
-
+    image: string;
 }
 export const useGetRestaurants=()=>{
     const[restaurant,setRestaurants]=useState<RestaurantProp[]>([]);

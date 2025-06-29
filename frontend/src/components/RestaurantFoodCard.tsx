@@ -1,23 +1,23 @@
 import React from 'react';
 import { Star } from 'lucide-react';
 
-interface RestaurantCardProps {
+interface RestaurantFoodItem {
   id: number;
   name: string;
-  address: string;
-  contact: string;
+  description: string;
   image: string;
+  price: number;
 }
 
-const RestaurantCard: React.FC<RestaurantCardProps> = ({
+export const RestaurantFoodCard: React.FC<RestaurantFoodItem> = ({
   name,
-  address,
-  contact,
-  image
+  description,
+  image,
+  price,
 }) => {
   return (
     <div className="bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-xl hover:scale-105 transition-all duration-300">
-      {/* Restaurant Image */}
+      {/* Image */}
       <div className="relative overflow-hidden h-48">
         <img
           src={image}
@@ -32,17 +32,21 @@ const RestaurantCard: React.FC<RestaurantCardProps> = ({
         </div>
       </div>
 
-      {/* Restaurant Details */}
+      {/* Details */}
       <div className="p-6">
         <div className="flex justify-between items-start mb-2">
           <h3 className="text-xl font-bold text-gray-900">{name}</h3>
+          <span className="text-m text-orange-600 font-semibold">₹{price}</span>
         </div>
 
-        <p className="text-gray-600 text-sm mb-1">{contact}</p>
-        <p className="text-gray-500 text-sm">{address}</p>
+        <p className="text-gray-600 text-sm mb-4 line-clamp-2">{description}</p>
+
+        <div className="flex items-center justify-between mb-4">
+          <span className="bg-orange-100 text-orange-800 text-xs font-medium px-2 py-1 rounded-full">
+            Veg
+          </span>
+        </div>
       </div>
     </div>
   );
 };
-
-export default RestaurantCard;
