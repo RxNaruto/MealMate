@@ -5,6 +5,7 @@ import { RestaurantFoodCard } from "../components/RestaurantFoodCard";
 export const FoodByRes=()=>{
     const {id}= useParams();
     const {food} = useFoodByRes(id!);
+
     return (
     <div className="p-4">
       <h1 className="text-2xl font-bold mb-4">Food Served by this restaurant</h1>

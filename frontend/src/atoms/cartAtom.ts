@@ -60,3 +60,13 @@ export const decreaseQtyAtom = atom(null, (get, set, target: CartItem) => {
     .filter((item) => item.quantity > 0);
   set(cartAtom, updatedCart);
 });
+export const removeItemAtom = atom(null, (get, set, itemToRemove: CartItem) => {
+  const updatedCart = get(cartAtom).filter(
+    (item) =>
+      !(
+        item.restaurantId === itemToRemove.restaurantId &&
+        item.foodId === itemToRemove.foodId
+      )
+  );
+  set(cartAtom, updatedCart);
+});

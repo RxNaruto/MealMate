@@ -8,6 +8,7 @@ import { RestaurantByFood } from "./pages/RestaurantsByFood";
 import { FoodByRes } from "./pages/FoodByRestaurant";
 import { CartPage } from "./pages/Cartpage";
 import { GetResTest } from "./pages/GetResTest";
+import { AllFoodTest } from "./pages/TestAllFood";
 function App(){
   return (
     <>
@@ -22,6 +23,7 @@ function App(){
      <Route path="/res/:id/food" element={<FoodByRes />} />
      <Route path="/cart" element={<CartPage />}/>
      <Route path="/res/:id/test" element={<GetResTest />} />
+     <Route path="/allF" element={<AllFoodTest />} />
 
     </Routes>
     </BrowserRouter>
